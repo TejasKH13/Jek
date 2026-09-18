@@ -24,6 +24,7 @@ pipeline
                     #!/bin/bash
                     pwd
                     whoami
+                    sleep 10
                 '''
             }
 
@@ -35,6 +36,7 @@ pipeline
             }
             steps{
                 echo "This is stage 3"
+                sh 'sleep 5'
 
             }
         }
@@ -42,7 +44,10 @@ pipeline
         {
             agent any
             steps{
-                sh 'echo "this is stage 4"'
+                sh '''
+                    echo this is stage 4
+                    sleep 5
+                '''
 
             }
         }
