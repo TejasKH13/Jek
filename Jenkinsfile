@@ -1,19 +1,24 @@
 pipeline
 {
-    agent{
-        label 'slave1'
-    }
+    agent none
     stages
     {
         stage('STAGE1')
         {
+            agent any
             steps
             {
-                sh 'ls -lrt'
+                sh '''
+                    ls -lt
+                    sleep 5
+                '''
             }
         }
         stage('STAGE2')
         {
+            agent {
+                label 'slave1'
+            }
             steps{
                 sh '''
                     #!/bin/bash
@@ -25,6 +30,9 @@ pipeline
         }
         stage ('STAGE3')
         {
+            agent{
+                label 'slave2'
+            }
             steps{
                 echo "This is stage 3"
 
@@ -32,6 +40,7 @@ pipeline
         }
         stage('STAGE4')
         {
+            agent any
             steps{
                 sh 'echo "this is stage 4"'
 
