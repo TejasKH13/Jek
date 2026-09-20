@@ -31,6 +31,7 @@ pipeline {
                     sleep 10
                     ls -lrt
                 '''
+                echo "${env.name}"
             }
         }
 
