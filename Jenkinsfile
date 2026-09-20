@@ -16,7 +16,7 @@ pipeline {
                 sh 'echo $Branch'
                 echo "${env.Branch}"
                 echo "${env.APP}"
-                echo "$env.name"
+                
             }
         }
 
