@@ -1,43 +1,48 @@
-pipeline{
+pipeline {
     agent any
-    parameters{
-        string (defaultValue: 'main', description: 'Giving the branch to build and deploy', name: 'Branch')
-        choice (choices: ['BUILD', 'COMPILE', 'TEST', 'DEPLOY'], 
-        description: 'Giving option', 
-        name: 'Env_choice')
-        booleanParam defaultValue: true, description: 'uncheck this to deploy', name: 'Dry-run'
-}
-}
 
-    
-    stages{
-        stage('stage1'){
-            step{
-                sh 'sleep 10'
-                echo "Running stage 1"
-            }
-        stage('stage2'){
-            step{
-                sh 'sleep 10'
+    parameters {
+        string(defaultValue: 'main', description: 'Provide the branch to build and deploy', name: 'BRANCH')
+        
+        choice(choices: ['TEST', 'QA', 'PRE-PROD', 'PROD'], 
+               description: 'Choose env to deploy ', 
+               name: 'ENVIRONMENT')
+
+        booleanParam defaultValue: true, description: 'Un check this to actually deploy', name: 'DRY-RUN'
+    }
+
+    stages {
+        stage('STAGE1') {
+            steps {
                 sh '''
                     ls -lrt
-                    pwd
-                    date
-                    '''
+                    sleep 5
+                '''
             }
-        stage('stage3'){
-            step{
+        }
+
+        stage('STAGE2') {
+            steps {
+                sh '''
+                    pwd 
+                    sleep 10
+                    ls -lrt
+                '''
+            }
+        }
+
+        stage('STAGE3') {
+            steps {
+                echo "This is Stage3"
                 sh 'sleep 5'
-                sh 'Echo running stage 3'
-                sh 'uptime'
-            }
-        stage('stage4'){
-            step{
-                sh 'sleep 10'
-                sh 'echo running stage 4'
             }
         }
-        }
-        }
+
+        stage('STAGE4') {
+            steps {
+                 sh 'echo THis is STAGE4'
+                 sh 'sleep 5'
+            }
         }
     }
+}
