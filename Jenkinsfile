@@ -1,49 +1,29 @@
 pipeline {
     agent any
 
-    parameters {
-        string(
-            defaultValue: 'main',
-            description: 'Provide the branch to build and deploy',
-            name: 'BRANCH'
-        )
-
-        choice(
-            choices: ['TEST', 'QA', 'PRE-PROD', 'PROD'],
-            description: 'Choose env to deploy',
-            name: 'ENVIRONMENT'
-        )
-
-        booleanParam(
-            defaultValue: true,
-            description: 'Uncheck this to actually deploy',
-            name: 'DRY-RUN'
-        )
-    }
-
     stages {
         stage('STAGE1') {
             steps {
-                sh '''
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
+                    sh '''
                     ls -lrt
                     sleep 5
                 '''
-
-                echo "Branch = ${params.BRANCH}"
-                echo "Name = ${params.ENVIRONMENT}"
-                echo "Dry_run = ${params['DRY-RUN']}"
+                } 
             }
         }
 
         stage('STAGE2') {
             steps {
-                sh '''
-                    pwd
-                    sleep 10
-                    ls -lrt
-                '''
-
-                echo "${env.name}"
+                try{
+                    sh '''
+                        exit 1
+                        '''
+                } catch (Exception e){
+                    echo "caught an exception = ${e.message}"
+                } finally{
+                    echo "cleaning up"
+                }
             }
         }
 
