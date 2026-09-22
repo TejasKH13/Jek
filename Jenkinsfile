@@ -4,8 +4,8 @@ pipeline {
         stage ('STAGE1') {
             steps {
                 sh 'pwd'
-                git branch: 'main'
-                    credentialsId: 'class_git'
+                git branch: 'main',
+                    credentialsId: 'class_git',
                     url: 'https://github.com/TejasKH13/Jek.git'
             }
         }
