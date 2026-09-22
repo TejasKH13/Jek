@@ -4,19 +4,14 @@ pipeline {
         stage ('STAGE1') {
             steps {
                 sh 'pwd'
-                git branch: 'main',
-                    credentialsId: 'class_git',
-                    url: 'https://github.com/TejasKH13/Jek.git'
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'class_git', url: 'https://github.com/TejasKH13/Jek.git']])
             }
         }
         stage ('STAGE2') {
             steps {
-                sh '''
-                    pwd
-                    ls -lrt
-                    '''
+                sh 'pwd'
+                sh 'ls -lrt'
             }
         }
     }
-
 }

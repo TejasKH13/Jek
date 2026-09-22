@@ -204,3 +204,31 @@ pipeline {
         }
     }
 }
+
+Jenkins with github one stage is depending in another (if you using github as SCM)
+
+
+pipeline {
+    agent any
+    stages {
+        stage ('STAGE1') {
+            steps {
+                sh 'pwd'
+                git branch: 'main',
+                    credentialsId: 'class_git',
+                    url: 'https://github.com/TejasKH13/Jek.git'
+            }
+        }
+        stage ('STAGE2') {
+            steps {
+                sh '''
+                    pwd
+                    ls -lrt
+                    '''
+            }
+        }
+    }
+
+}
+
+Jenkins with github one stage is depending in another (if you using gitany as SCM)
