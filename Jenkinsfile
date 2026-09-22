@@ -4,7 +4,7 @@ pipeline {
         stage('STAGE1') {
             when {
                 expression {
-                    env.GIT_BRANCH == origin/main
+                    env.GIT_BRANCH == 'origin/main'
                 }
             }
             steps {
