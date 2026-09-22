@@ -38,7 +38,7 @@ pipeline {
                 stage('sub-stage3') {
                     steps {
                         echo 'running sub stage3'
-                        sh 'ls -ld */'
+                        sh 'whoami'
                     }
                 }
             }
