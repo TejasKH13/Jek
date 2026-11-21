@@ -25,10 +25,10 @@ pipeline {
                     ls -lt
                     echo "Branch: $Branch"
                 '''
-                echo "Branch:${env.BRANCH}"
-                echo "Branch = ${params.Branch}"
-                echo "Dry-Run: ${params.DRY-RUN}"
-                echo "Enviornment:${params.Enviornment}"
+                echo "Branch : ${params.Branch}"
+                echo "Dry_Run : ${parmas.DRY-RUN}"
+                echo "Enviornment : ${params.Enviornment}"
+
             }
         }
         stage('Stage2') {
