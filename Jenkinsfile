@@ -17,6 +17,7 @@ pipeline {
                 APP = "Front"
             }
             steps {
+                
                 sh '''
                     echo "Running Stage Build"
                     pwd
@@ -63,6 +64,40 @@ pipeline {
                 echo "Deploy : ${env.Deploy}"
                 echo "Branch : ${params.Branch}"
                 
+            }
+        }
+        stage('Production') {
+            steps {
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    sh '''
+                     exit 1
+                     '''
+                }
+            }
+        }
+        stage('Server') {
+            steps {
+                script {
+                    try {
+                        sh '''
+                            exit 1
+                         '''
+                    } catch(Exception e) {
+                        echo "Got an exeption: ${e.message}"
+                        currentBuild.result = 'SUCESS'
+                    }finally {
+                        echo "cleaning up ..."
+                    }
+
+                }
+            }
+        }
+        stage('Final') {
+            steps {
+                sh '''
+                  echo "final block is running"
+                  date
+                  '''
             }
         }
 
