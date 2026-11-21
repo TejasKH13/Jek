@@ -71,7 +71,7 @@ pipeline {
                 label 'slave1'
             }
             steps {
-                catchError(buildResult: 'SUCCESS') {
+                catchError(buildResult: 'SUCCESS' , stageResult: 'FAILURE') {
                     sh '''
                         exit 1
                      '''
