@@ -20,13 +20,15 @@ pipeline {
             }
             steps {
                 sh '''
-                    echo APP - $APP
+                    echo "APP - $APP"
                     pwd
                     ls -lt
-                    echo "Branch: $Branch
+                    echo "Branch: $Branch"
                 '''
-                echo "${env.BRANCH}"
-                echo "${params.}"
+                echo "Branch:${env.BRANCH}"
+                echo "Branch = ${params.Branch}"
+                echo "Dry-Run: ${params.DRY-RUN}"
+                echo "Enviornment:${params.Enviornment}"
             }
         }
         stage('Stage2') {
@@ -43,6 +45,7 @@ pipeline {
                     hostname
                     hostname -I
                 '''
+                echo "Branch: ${params.Branch}"
 
             }
         }
