@@ -20,10 +20,10 @@ pipeline {
             }
             steps {
                 sh '''
-                    echo APP - $APP
+                    echo "APP - $APP"
                     pwd
                     ls -lt
-                    echo "Branch: $Branch
+                    echo "Branch: $Branch"
                 '''
                 echo "${env.BRANCH}"
               
