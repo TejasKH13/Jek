@@ -48,7 +48,7 @@ pipeline {
             }
         }
         stage('DEPOLY') {
-            agent{
+            agent {
                 label 'master'
             }
             environment {
@@ -73,9 +73,9 @@ pipeline {
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     sh '''
-                     exit 1
+                        exit 1
                      '''
-                }
+                    }
             }
         }
         stage('Server') {
