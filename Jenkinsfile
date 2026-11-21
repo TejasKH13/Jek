@@ -11,7 +11,7 @@ pipeline {
 
 
     stages {
-        stage('Stage1') {
+        stage('Build') {
             agent {
                 label 'slave1'
             }
@@ -31,7 +31,7 @@ pipeline {
 
             }
         }
-        stage('Stage2') {
+        stage('Test') {
             agent {
                 label 'slave2'
             }
@@ -49,7 +49,7 @@ pipeline {
 
             }
         }
-        stage('stage3') {
+        stage('Deploy') {
             agent {
                 label 'master'
             }
