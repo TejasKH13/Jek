@@ -10,6 +10,9 @@ pipeline {
                     }
     stages {
         stage('Build') {
+            agent{
+                label 'slave1'
+            }
             environment {
                 APP = "Front"
             }
@@ -26,6 +29,9 @@ pipeline {
             }
         }
         stage('Test') {
+            agent {
+                label 'slave2'
+            }
             environment {
                 Test = "Testing"
             }
@@ -41,6 +47,9 @@ pipeline {
             }
         }
         stage('DEPOLY') {
+            agent{
+                label 'master'
+            }
             environment {
                 Deploy = "Deployment"
             }
