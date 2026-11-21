@@ -67,6 +67,9 @@ pipeline {
             }
         }
         stage('Production') {
+            agent {
+                label 'slave1'
+            }
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     sh '''
@@ -76,6 +79,7 @@ pipeline {
             }
         }
         stage('Server') {
+            agent 'slave2'
             steps {
                 script {
                     try {
@@ -93,6 +97,9 @@ pipeline {
             }
         }
         stage('Final') {
+            agent {
+                label 'master'
+            }
             steps {
                 sh '''
                   echo "final block is running"
