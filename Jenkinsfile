@@ -56,7 +56,7 @@ pipeline {
             steps {
                 sh '''
                     echo "welcome to last stage and all stages will ends here"
-                    ls -ld */
+                    ls -l
                     date
                     echo "Deploy : $Deploy"
                     '''
