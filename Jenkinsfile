@@ -26,7 +26,7 @@ pipeline {
                     echo "Branch: $Branch
                 '''
                 echo "${env.BRANCH}"
-                echo "${params.}"
+              
             }
         }
         stage('Stage2') {
