@@ -26,7 +26,7 @@ pipeline {
                     echo "Branch: $Branch"
                 '''
                 echo "Branch : ${params.Branch}"
-                echo "Dry_Run : ${parmas.DRY-RUN}"
+                echo "Dry_Run : ${params.DRY-RUN}"
                 echo "Enviornment : ${params.Enviornment}"
 
             }
