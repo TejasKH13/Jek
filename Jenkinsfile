@@ -79,7 +79,9 @@ pipeline {
             }
         }
         stage('Server') {
-            agent 'slave2'
+            agent {
+                label 'slave2'
+            }
             steps {
                 script {
                     try {
