@@ -1,62 +1,61 @@
 pipeline {
     agent none
     parameters {
-                string defaultValue: 'main', description: 'Provide the branch name ', name: 'Branch', trim: true
-                booleanParam description: 'Uncheck this actually deploy', name: 'DRY_RUN'
-                choice choices: ['Build', 'Test', 'Deploy'], description: 'chose proper option to run', name: 'Enviornment'
-                }
-            environment {
-            BRANCH = "main"
+                string defaultValue: 'main', description: 'Provide the branch name to build or deploy', name: 'Branch', trim: true
+                booleanParam description: 'Un-check this to actually deploy', name: 'DRYRUN'
+                choice choices: ['Build', 'Test', 'Deploy'], description: 'Select the environment based on the request', name: 'Environment'
             }
-
-
+            environment {
+                        BRANCH = "main"
+                    }
     stages {
         stage('Build') {
-            agent {
-                label 'slave1'
-            }
             environment {
                 APP = "Front"
             }
             steps {
                 sh '''
-                    echo "APP - $APP"
+                    echo "Running Stage Build"
                     pwd
                     ls -lt
+                    uptime
+                    echo "App : $APP"
                 '''
-                echo "Branch : ${params.Branch}"
-                echo "DryRun : ${params.DRY-RUN}"
-                echo "Enviornment : ${params.Enviornment}"
-
+                echo "Application : ${env.APP}"
+                echo "Environment: ${params.Environment}"
             }
         }
         stage('Test') {
-            agent {
-                label 'slave2'
-            }
             environment {
-                APP_1 = "Backend"
+                Test = "Testing"
             }
             steps {
                 sh '''
-                    echo "APP_1 - $APP_1"
-                    echo "Enviornment: $Enviornment"
+                    echo "Welcome to testing stage"
+                    hostname -I 
                     hostname
-                    hostname -I
-                '''
-                echo "Branch: ${params.Branch}"
-
+                    whoami
+                    '''
+                echo "test: ${env.Test}"
+                echo "RunType: ${params.DRYRUN} "
             }
         }
-        stage('Deploy') {
-            agent {
-                label 'master'
+        stage('DEPOLY') {
+            environment {
+                Deploy = "Deployment"
             }
             steps {
                 sh '''
-                    echo "all stages are complete successfully"
-                '''
+                    echo "welcome to last stage and all stages will ends here"
+                    ls -ld */
+                    date
+                    echo "Deploy : $Deploy"
+                    '''
+                echo "Deploy : ${env.Deploy}"
+                echo "Branch : ${params.Branch}"
+                
             }
         }
+
     }
 }
