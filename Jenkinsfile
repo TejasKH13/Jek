@@ -2,7 +2,7 @@ pipeline {
     agent none
     parameters {
                 string defaultValue: 'main', description: 'Provide the branch name ', name: 'Branch', trim: true
-                booleanParam description: 'Uncheck this actually deploy', name: 'DRY-RUN'
+                booleanParam description: 'Uncheck this actually deploy', name: 'DRY_RUN'
                 choice choices: ['Build', 'Test', 'Deploy'], description: 'chose proper option to run', name: 'Enviornment'
                 }
             environment {
@@ -16,14 +16,13 @@ pipeline {
                 label 'slave1'
             }
             environment {
-                APP = "Frontend"
+                APP = "Front"
             }
             steps {
                 sh '''
                     echo "APP - $APP"
                     pwd
                     ls -lt
-                    echo "Branch: $Branch"
                 '''
                 echo "Branch : ${params.Branch}"
                 echo "DryRun : ${params.DRY-RUN}"
