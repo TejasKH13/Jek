@@ -113,11 +113,13 @@ pipeline {
                          '''
                      
                        // stage6Status = 'SUCCESS' --It is other way 
+                       env.STAGE6_STATUS = 'SUCCESS' //using env variable
 
                         } catch (Exception x) {
                             echo "Caught an exception ${x.message}"
-                            currentBuild.result = 'FAILURE' // -it is using inbuilt variable
-                            currentStage.result = 'FAILURE'
+                            //currentBuild.result = 'FAILURE' // -it is using inbuilt variable
+                            //currentStage.result = 'FAILURE' // making stage result as failed 
+                            env.STAGE6_STATUS = 'FAILURE' //--using enviornment variable
                         }
                 }
                 
@@ -129,21 +131,21 @@ pipeline {
             }
             when {
                 expression {
-                    currentBuild.result == 'SUCCESS'
+                    env.STAGE6_STATUS == 'SUCCESS'
                 }
             }
             steps {
                 echo "stage 7 is executed"
             }
         }
-        stage('Final') {
+        stage('Stage8') {
             agent {
                 label 'slave2'
             }
             when {
                 expression {
-                    currentBuild.result == 'FAILURE'
-                    currentStage.Result == 'FAILURE'
+                    env.STAGE6_STATUS == 'FAILURE'
+                    
                 }
             }
             steps {
