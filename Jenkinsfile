@@ -117,7 +117,7 @@ pipeline {
                         } catch (Exception x) {
                             echo "Caught an exception ${x.message}"
                             stage6Status = 'FAILED'
-                            (stageResult: 'FAILURE')
+                            
                         }
                 }
                 
