@@ -1,3 +1,5 @@
+def stage6Status == ''
+
 pipeline {
     agent none
     parameters {
@@ -98,15 +100,39 @@ pipeline {
                 }
             }
         }
-        stage('Final') {
+        stage('Stage6') {
             agent {
                 label 'master'
             }
             steps {
-                sh '''
-                  echo "final block is running"
-                  date
-                  '''
+                script {
+                    try {
+                        sh '''
+                            echo "final block is running"
+                             date
+                         '''
+                        stage5Status = 'SUCCESS'
+
+                        } catch (Exception x) {
+                            echo "Caught an exception ${x.message}"
+                            stage6Status = 'FAILED'
+
+                        }
+                }
+                
+            }
+        }
+        stage('stage6') {
+            agent {
+                label 'slave1'
+            }
+            when {
+                expression {
+                    stage1Status == 'SUCCESS'
+                }
+            }
+            steps {
+                echo "stage 6 is executed"
             }
         }
 
