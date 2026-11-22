@@ -109,7 +109,7 @@ pipeline {
                     try {
                     
                         sh '''
-                            exit 1
+                            hostname -I
                          '''
                      
                        // stage6Status = 'SUCCESS' --It is other way 
