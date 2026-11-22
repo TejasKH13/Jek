@@ -107,17 +107,17 @@ pipeline {
             steps {
                 script {
                     try {
-                        catchError(stageResult: 'FAILURE'){
+                    
                         sh '''
                             exit 1
                          '''
-                     }
+                     
                         stage6Status = 'SUCCESS'
 
                         } catch (Exception x) {
                             echo "Caught an exception ${x.message}"
                             stage6Status = 'FAILED'
-
+                            stageResult: 'FAILURE'
                         }
                 }
                 
