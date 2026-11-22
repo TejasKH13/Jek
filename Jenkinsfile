@@ -143,6 +143,7 @@ pipeline {
             when {
                 expression {
                     currentBuild.result == 'FAILURE'
+                    currentStage.Result == 'FAILURE'
                 }
             }
             steps {
