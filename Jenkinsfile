@@ -108,8 +108,7 @@ pipeline {
                 script {
                     try {
                         sh '''
-                            echo "final block is running"
-                             date
+                            exit 1
                          '''
                         stage6Status = 'SUCCESS'
 
@@ -135,6 +134,16 @@ pipeline {
                 echo "stage 6 is executed"
             }
         }
+        stage('Final') {
+            agent {
+                label = 'slave2'
+            }
+            steps {
+                echo "final steps is executed"
+            }
+        }
+
+
 
     }
 }
