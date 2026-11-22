@@ -168,6 +168,30 @@ pipeline {
 
             }
         }
+        //Parellel stages
+        stage('stage10') {
+            agent {
+                label 'slave1'
+            }
+            parallel {
+                stage('SUB-STAGE1') {
+                    steps {
+                        sh 'which java'
+                    }
+                }
+                stage('SUB-STAGE2') {
+                    steps {
+                        sh 'uname -a'
+                    }
+                }
+                stage('SUB-STAGE3') {
+                    steps {
+                        sh 'pwd'
+                    }
+                }
+            }
+            
+        }
         
 
 
