@@ -121,7 +121,7 @@ pipeline {
                 
             }
         }
-        stage('stage6') {
+        stage('stage7') {
             agent {
                 label 'slave1'
             }
@@ -131,7 +131,7 @@ pipeline {
                 }
             }
             steps {
-                echo "stage 6 is executed"
+                echo "stage 7 is executed"
             }
         }
         stage('Final') {
