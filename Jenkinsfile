@@ -158,8 +158,8 @@ pipeline {
             }
             steps {
                 git branch: 'main',
-                credentialsId: 'class_git_cred'
-                url: 'https://github.com/TejasKH13/Jek.git'
+                    credentialsId: 'class_git_cred',
+                    url: 'https://github.com/TejasKH13/Jek.git'
 
                 sh '''
                 pwd
