@@ -136,7 +136,7 @@ pipeline {
         }
         stage('Final') {
             agent {
-                label = 'slave2'
+                label 'slave2'
             }
             steps {
                 echo "final steps is executed"
