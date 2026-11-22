@@ -170,9 +170,6 @@ pipeline {
         }
         //Parellel stages
         stage('stage10') {
-            agent {
-                label 'slave1'
-            }
             parallel {
                 stage('SUB-STAGE1') {
                     steps {
