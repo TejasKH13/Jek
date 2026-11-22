@@ -152,21 +152,23 @@ pipeline {
                 echo "final steps is executed"
             }
         }
-        stage('Final') {
+        stage('stage9'){
             agent {
                 label 'master'
             }
-            when {
-                expression {
-                    env.GIT_BRANCH == 'origin/main'
-                    env.JOB_NAME == 'pipeline' 
-                }
-                steps {
-                    echo "${env.JOB_NAME}"
-                    echo "${env.GIT_BRANCH}"
-                }
+            steps {
+                git branch: 'main',
+                credentialsId: 'class_git_cred'
+                url: 'https://github.com/TejasKH13/Jek.git'
+
+                sh '''
+                pwd
+                ls -lt
+                '''
+
             }
         }
+        
 
 
 
