@@ -131,7 +131,7 @@ pipeline {
             }
             when {
                 expression {
-                    env.STAGE6_STATUS == 'SUCCESS'
+                    env.STAGE6_STATUS == 'SUCCESS' //-use built in or env to access 
                 }
             }
             steps {
@@ -150,6 +150,23 @@ pipeline {
             }
             steps {
                 echo "final steps is executed"
+            }
+        }
+        stage('Final') {
+            agent {
+                label 'master'
+            }
+            when {
+                expression {
+                    env.GIT_BRANCH == 'origin/main'
+                    env.JOB_NAME == 'pipeline' 
+                }
+                steps {
+                    echo "${env.BUILD_NUMBER}"
+                    echo "${env.JOB_NAME}"
+                    echo "${env.JENKINS_URL}"
+                    echo "${env.GIT_BRANCH}"
+                }
             }
         }
 
