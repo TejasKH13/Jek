@@ -117,7 +117,7 @@ pipeline {
                         } catch (Exception x) {
                             echo "Caught an exception ${x.message}"
                             currentBuild.result = 'FAILURE' // -it is using inbuilt variable
-                            
+                            currentStage.result = 'FAILURE'
                         }
                 }
                 
