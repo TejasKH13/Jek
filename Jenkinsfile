@@ -1,4 +1,4 @@
-def stage6Status == ''
+def stage6Status = ''
 
 pipeline {
     agent none
