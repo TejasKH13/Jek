@@ -75,7 +75,7 @@ pipeline {
             steps {
                 catchError(buildResult: 'SUCCESS' , stageResult: 'FAILURE') {
                     sh '''
-                        exit 1
+                        ls
                      '''
                     }
             }
