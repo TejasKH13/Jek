@@ -111,7 +111,7 @@ pipeline {
                             echo "final block is running"
                              date
                          '''
-                        stage5Status = 'SUCCESS'
+                        stage6Status = 'SUCCESS'
 
                         } catch (Exception x) {
                             echo "Caught an exception ${x.message}"
@@ -128,7 +128,7 @@ pipeline {
             }
             when {
                 expression {
-                    stage1Status == 'SUCCESS'
+                    stage6Status == 'SUCCESS'
                 }
             }
             steps {
