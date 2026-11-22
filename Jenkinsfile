@@ -112,11 +112,11 @@ pipeline {
                             exit 1
                          '''
                      
-                        stage6Status = 'SUCCESS'
+                       // stage6Status = 'SUCCESS' --It is other way 
 
                         } catch (Exception x) {
                             echo "Caught an exception ${x.message}"
-                            stage6Status = 'FAILED'
+                            currentBuild.result = 'FAILURE' // -it is using inbuilt variable
                             
                         }
                 }
@@ -129,7 +129,7 @@ pipeline {
             }
             when {
                 expression {
-                    stage6Status == 'SUCCESS'
+                    currentBuild.result == 'SUCCESS'
                 }
             }
             steps {
@@ -139,6 +139,11 @@ pipeline {
         stage('Final') {
             agent {
                 label 'slave2'
+            }
+            when {
+                expression {
+                    currentBuild.result == 'FAILURE'
+                }
             }
             steps {
                 echo "final steps is executed"
