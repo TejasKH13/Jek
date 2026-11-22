@@ -2,6 +2,17 @@ def stage6Status = ''
 
 pipeline {
     agent none
+    options {
+                timestamps
+                buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '5')
+                timeout(time: 10, unit: 'SECONDS')
+                retry(-16)
+            }
+    triggers {
+                pollSCM 'H * * * * '
+                }
+
+
     parameters {
                 string defaultValue: 'main', description: 'Provide the branch name to build or deploy', name: 'Branch', trim: true
                 booleanParam description: 'Un-check this to actually deploy', name: 'DRYRUN'
