@@ -3,7 +3,6 @@ def stage6Status = ''
 pipeline {
     agent none
     options {
-                timestamps
                 buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '5')
                 timeout(time: 10, unit: 'SECONDS')
                 retry(-16)
