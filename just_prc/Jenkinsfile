@@ -5,13 +5,17 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                catchError(buildResult: 'SUCCESS', stageResult: 'SUCCESS') {
-                            sh '''
-                                pwd
-                                exit 1
-                            '''
-
-            }
+                script {
+                    try {
+                        sh '''
+                         exit 1
+                        '''
+                    catch(Exception e) {
+                         echo "Caught an exception: ${e.message}"
+                    }
+                
+                    }
+                }
             
         }
 
