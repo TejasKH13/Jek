@@ -7,7 +7,7 @@ pipeline {
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                             sh '''
-                                sleep 10
+                                pwd
                                 exit 1
                             '''
 
@@ -18,7 +18,7 @@ pipeline {
     }
     stage('Test') {
         steps {
-            sh '2nd stage is exected'
+            echo "2nd stage is executed"
         }
     }
 
