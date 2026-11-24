@@ -1,27 +1,28 @@
+
 pipeline {
     agent {
         label 'master'
     }
+
     stages {
         stage('Build') {
             steps {
                 script {
                     try {
                         sh '''
-                         exit 1
+                            exit 1
                         '''
-                }catch(Exception e){
-                    echo "Exception is handled: ${e.message}"
+                    } catch (Exception e) {
+                        echo "Exception is handled: ${e.message}"
+                    }
                 }
-            
+            }
         }
 
-    }
-    stage('Test') {
-        steps {
-            echo "2nd stage is executed"
+        stage('Test') {
+            steps {
+                echo "2nd stage is executed"
+            }
         }
     }
-
- }
 }
