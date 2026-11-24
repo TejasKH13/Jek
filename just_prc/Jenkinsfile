@@ -14,7 +14,7 @@ pipeline {
                         '''
                     } catch (Exception e) {
                         echo "Exception is handled: ${e.message}"
-                        currentBuild.result = 'FAILURE'
+                        currentStage.result = 'FAILURE'
                     }
                 }
             }
