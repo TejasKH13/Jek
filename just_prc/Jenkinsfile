@@ -5,7 +5,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                catchError(buildResult: 'SUCCESS', stageResult: 'SUCESS') {
+                catchError(buildResult: 'SUCCESS', stageResult: 'SUCCESS') {
                             sh '''
                                 pwd
                                 exit 1
