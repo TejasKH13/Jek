@@ -62,3 +62,20 @@ ls -lt
 //         }
 //     }
 // }
+
+---ACCEING build in variable and env variable in groovy script
+stage('Final') {
+            agent {
+                label 'master'
+            }
+            when {
+                expression {
+                    env.GIT_BRANCH == 'origin/main'
+                    env.JOB_NAME == 'pipeline' 
+                }
+                steps {
+                    echo "${env.JOB_NAME}"
+                    echo "${env.GIT_BRANCH}"
+                }
+            }
+        }
